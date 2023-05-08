@@ -16,9 +16,9 @@ export default async function handler(
     quizlets.rows.map(async (quizlet) => {
       const user = await clerk.users.getUser(quizlet.clerk);
 
-      const { data } = await axios.get(quizlet.url);
+      const data = fetch(quizlet.url).then((res) => res.text());
 
-      const $ = cheerio.load(data);
+      const $ = cheerio.load(await data);
 
       const title = $(
         "#setPageSetIntroWrapper > div > div > div.SetPage-setTitle > div.SetPage-titleWrapper > h1"
