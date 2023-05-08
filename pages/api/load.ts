@@ -1,29 +1,36 @@
 import { db } from "@vercel/postgres";
 import { NextApiRequest, NextApiResponse } from "next";
 import clerk from "@clerk/clerk-sdk-node";
-import Xray from "x-ray";
+import axios from "axios";
+import * as cheerio from "cheerio";
 
 export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
   const client = await db.connect();
-  const xray = Xray();
 
   const quizlets = await client.sql`SELECT * FROM Quizlets;`;
 
   const quizletsArray = await Promise.all(
     quizlets.rows.map(async (quizlet) => {
       const user = await clerk.users.getUser(quizlet.clerk);
-      const title = await new Promise((resolve, reject) => {
-        xray(
-          quizlet.url,
-          "#setPageSetIntroWrapper > div > div > div.SetPage-setTitle > div.SetPage-titleWrapper > h1"
-        )((err: Error, title: string) => {
-          if (err) reject(err);
-          else resolve(title);
-        });
-      });
+
+      const { data, error } = await axios.get(quizlet.url);
+
+      if (error) {
+        console.log(error);
+        return;
+      }
+
+      const $ = cheerio.load(data);
+
+      const title = $(
+        "#setPageSetIntroWrapper > div > div > div.SetPage-setTitle > div.SetPage-titleWrapper > h1"
+      ).text();
+
+      console.log(title);
+
       return {
         id: quizlet.id,
         url: quizlet.url,
