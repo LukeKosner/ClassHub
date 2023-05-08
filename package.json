@@ -1,6 +1,6 @@
 {
-  "name": "classhub",
-  "version": "0.0.6",
+  "name": "govhub",
+  "version": "0.0.7",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -29,6 +29,7 @@
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icons": "^4.8.0",
     "shadcn-ui": "^0.1.2",
     "swr": "^2.1.5",
     "tailwind-merge": "^1.12.0",

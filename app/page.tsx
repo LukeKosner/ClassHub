@@ -1,32 +1,80 @@
-"use client";
+import Link from "next/link";
+import { FaArrowRight } from "react-icons/fa";
 
-import Viewer from "@/components/viewer";
-import Form from "@/components/form";
-import useSWR from "swr";
-import axios from "axios";
-
-export default function Home(): JSX.Element {
-  const { data, error } = useSWR("/api/load", (url) =>
-    axios.get(url).then((res) => res.data)
-  );
-
-  if (error) {
-    throw Error(error.message);
-  }
-
-  if (!data) {
-    return (
-      <div className="h-screen flex">
-        <p className="m-auto">Loading...</p>
-      </div>
-    );
-  }
-
+export default function Home() {
   return (
-    <div className="h-screen flex flex-col m-8 space-y-3">
-      <Viewer data={data} />
-      <hr className="border-gray-300" />
-      <Form />
-    </div>
+    <main className="min-h-screen bg-gray-200 text-black dark:bg-gray-900 dark:text-white p-5">
+      <div id="columns" className="flex flex-row min-h-screen">
+        <div id="line" className="w-1 mt-3 bg-black dark:bg-white rounded-xl" />
+
+        <div id="text" className="flex flex-col p-5 space-y-12">
+          <div className="space-y-3">
+            <h1 className="text-5xl font-bold">
+              Services for the Class of 2026.
+            </h1>
+            <p className="font-lg">Made by Luke Kosner.</p>
+          </div>
+
+          <div id="updates" className="space-y-3">
+            <div className="flex flex-row">
+              <h1 className="text-3xl font-bold">Updates</h1>
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              </span>
+            </div>
+
+            <div className="p-3 rounded-xl border border-green-500">
+              <p>
+                I am continuing to work on the Quizlet-sharer. Updates soon.
+              </p>
+              <p className="font-mono">- 5/8/23</p>
+            </div>
+          </div>
+
+          <div id="projects" className="space-y-3">
+            <h1 className="text-3xl font-bold">Services</h1>
+            <div className="space-y-1">
+              <Link
+                href="https://forms.gle/ZYY59iPZ583NaH666"
+                className="flex flex-row space-x-3 items-center hover:underline"
+              >
+                <h2 className="text-2xl">Forms</h2>
+                <FaArrowRight />
+              </Link>
+              <p>
+                Report 2-3-4 rule violations, give anonymous complaints, and
+                suggest ideas.
+              </p>
+            </div>
+            <div className="space-y-1">
+              <Link
+                href="/quizlet"
+                className="flex flex-row space-x-3 items-center"
+              >
+                <h2 className="text-2xl  hover:underline">Quizlet Sharer</h2>
+                <p className="text-black bg-yellow-400 rounded-full px-2 py-1">
+                  In Development
+                </p>
+                <FaArrowRight />
+              </Link>
+              <p>Share knowledge and learn faster.</p>
+            </div>
+            <div className="space-y-1">
+              <Link
+                href="/"
+                className="flex flex-row space-x-3 items-center pointer-events-none"
+              >
+                <h2 className="text-2xl  hover:underline">CitiBike Discount</h2>
+                <p className="bg-red-400 rounded-full px-2 py-1">
+                  Hopefully 🤞
+                </p>
+              </Link>
+              <p>Working for better biking for Collegiate students.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
   );
 }

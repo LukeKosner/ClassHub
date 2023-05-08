@@ -18,13 +18,15 @@ export default async function handler(
 
       const data = fetch(quizlet.url).then((res) => res.text());
 
+      console.log("data", data);
+      
       const $ = cheerio.load(await data);
 
       const title = $(
         "#setPageSetIntroWrapper > div > div > div.SetPage-setTitle > div.SetPage-titleWrapper > h1"
       ).text();
 
-      console.log(title);
+      console.log("title", title);
 
       return {
         id: quizlet.id,
@@ -37,6 +39,10 @@ export default async function handler(
       };
     })
   );
+
+  console.log("quizletsArray", quizletsArray);
+
+  console.log("hello!");
 
   return response.status(200).json(quizletsArray);
 }

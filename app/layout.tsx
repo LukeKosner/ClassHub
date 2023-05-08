@@ -3,7 +3,7 @@ import { ClerkProvider, UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import Link from "next/link";
 
 export const metadata = {
-  title: "ClassHub",
+  title: "GovHub",
   description: "From Luke Kosner",
 };
 
@@ -15,23 +15,23 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className="min-h-screen bg-gray-200 text-black dark:bg-gray-900 dark:text-white">
+        <main className="min-h-screen bg-gray-200 text-black dark:bg-gray-900 dark:text-white p-5">
           <div
             id="header"
-            className="h-12 flex flex-row items-center justify-between bg-gray-800 text-white py-8 px-4"
+            className="h-12 flex flex-row items-center justify-between"
           >
             <Link href="/">
-              <h1 className="text-2xl">ClassHub</h1>
+              <h1 className="text-2xl">GovHub</h1>
             </Link>
             <SignedIn>
               <UserButton />
             </SignedIn>
           </div>
           {children}
-          <div className="h-12 flex flex-row items-center justify-between bg-gray-800 text-white py-8 px-4">
-            <p>© 2023 Luke Kosner</p>
+          <div id="footer" className="mt-3 flex flex-row items-center">
+            <p className="text-lg">&copy; 2023 - Student Government.</p>
           </div>
-        </body>
+        </main>
       </html>
     </ClerkProvider>
   );
