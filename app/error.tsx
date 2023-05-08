@@ -17,7 +17,7 @@ export default function Error({
   return (
     <div className="bg-blue-900 text-white p-8 min-h-screen flex flex-col">
       <h2 className="text-4xl font-bold">A problem has been detected</h2>
-      <p className="mb-auto text-lg mb-4">Error message: {error.message}</p>
+      <p className="mb-auto text-lg">Error message: {error.message}</p>
 
       <button
         onClick={

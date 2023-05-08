@@ -17,7 +17,7 @@ type Quizlet = {
   user: string;
 };
 
-export default function Viewer(params): JSX.Element {
+export default function Viewer(params: any): JSX.Element {
   const [query, setQuery] = useState("");
   const [subject, setSubject] = useState("");
 
