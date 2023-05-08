@@ -19,7 +19,7 @@ export default function Form() {
     }
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: any) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
