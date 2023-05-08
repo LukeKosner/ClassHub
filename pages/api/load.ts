@@ -1,7 +1,7 @@
 import { db } from "@vercel/postgres";
 import { NextApiRequest, NextApiResponse } from "next";
 import clerk from "@clerk/clerk-sdk-node";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import * as cheerio from "cheerio";
 
 export default async function handler(
@@ -16,12 +16,7 @@ export default async function handler(
     quizlets.rows.map(async (quizlet) => {
       const user = await clerk.users.getUser(quizlet.clerk);
 
-      const { data, error } = await axios.get(quizlet.url);
-
-      if (error) {
-        console.log(error);
-        return;
-      }
+      const { data } = await axios.get(quizlet.url);
 
       const $ = cheerio.load(data);
 
