@@ -1,5 +1,11 @@
 import "./globals.css";
-import { ClerkProvider, UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
+import {
+  ClerkProvider,
+  UserButton,
+  SignedIn,
+  SignedOut,
+  currentUser,
+} from "@clerk/nextjs";
 import Link from "next/link";
 
 export const metadata = {
@@ -7,15 +13,16 @@ export const metadata = {
   description: "From Luke Kosner",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <ClerkProvider>
       <html lang="en">
-        <main className="min-h-screen bg-gray-200 text-black dark:bg-gray-900 dark:text-white p-5">
+        <body className="min-h-screen bg-gray-200 text-black dark:bg-gray-900 dark:text-white p-5">
           <div
             id="header"
             className="h-12 flex flex-row items-center justify-between"
@@ -31,7 +38,7 @@ export default function RootLayout({
           <div id="footer" className="mt-3 flex flex-row items-center">
             <p className="text-lg">&copy; 2023 - Student Government.</p>
           </div>
-        </main>
+        </body>
       </html>
     </ClerkProvider>
   );
