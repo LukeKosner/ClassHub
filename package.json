@@ -1,5 +1,5 @@
 {
-  "name": "quizlet-2",
+  "name": "classhub",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -34,6 +34,11 @@
     "tailwindcss": "3.3.2",
     "tailwindcss-animate": "^1.0.5",
     "typescript": "5.0.4",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "x-ray": "^2.3.4"
+  },
+  "devDependencies": {
+    "@types/x-ray": "^2.3.3",
+    "fs": "0.0.1-security"
   }
 }

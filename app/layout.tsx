@@ -3,7 +3,7 @@ import { ClerkProvider, UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import Link from "next/link";
 
 export const metadata = {
-  title: "QuizletHub",
+  title: "ClassHub",
   description: "From Luke Kosner",
 };
 
@@ -21,21 +21,16 @@ export default function RootLayout({
             className="h-12 flex flex-row items-center justify-between bg-gray-800 text-white py-8 px-4"
           >
             <Link href="/">
-              <h1 className="text-2xl">QuizletHub</h1>
+              <h1 className="text-2xl">ClassHub</h1>
             </Link>
             <SignedIn>
-              <div className="flex flex-row items-center space-x-3">
-                <Link
-                  href="/form"
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 rounded-xl"
-                >
-                  Add a Quizlet
-                </Link>
-                <UserButton />
-              </div>
+              <UserButton />
             </SignedIn>
           </div>
           {children}
+          <div className="h-12 flex flex-row items-center justify-between bg-gray-800 text-white py-8 px-4">
+            <p>© 2023 Luke Kosner</p>
+          </div>
         </body>
       </html>
     </ClerkProvider>

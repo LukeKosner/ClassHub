@@ -1,18 +1,31 @@
+"use client";
+
+import { useState } from "react";
+import axios from "axios";
+
 export default function Form() {
+  const [formData, setFormData] = useState({
+    url: "",
+    subject: "computer science",
+  });
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post("/api/up", formData);
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
+
   return (
-    <form className="max-w-md mx-auto my-8" action="/api/up" method="post">
-      <div className="mb-4">
-        <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
-          Name:
-        </label>
-        <input
-          required
-          type="text"
-          id="name"
-          name="name"
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        />
-      </div>
+    <form onSubmit={handleSubmit}>
+      <h3 className="text-2xl font-bold mb-2">Add a Quizlet</h3>
       <div className="mb-4">
         <label htmlFor="url" className="block text-gray-700 font-bold mb-2">
           URL:
@@ -22,6 +35,8 @@ export default function Form() {
           type="text"
           id="url"
           name="url"
+          value={formData.url}
+          onChange={handleChange}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
@@ -34,6 +49,8 @@ export default function Form() {
           required
           id="subject"
           name="subject"
+          value={formData.subject}
+          onChange={handleChange}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         >
           <option value="computer science">Computer Science</option>

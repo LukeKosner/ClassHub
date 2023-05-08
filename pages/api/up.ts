@@ -10,7 +10,7 @@ export default async function handler(
   const body = request.body;
   const { userId: clerk } = getAuth(request);
 
-  const { name, subject, url } = body;
+  const { subject, url } = body;
 
   const date = new Date();
   const year = date.getFullYear();
@@ -29,9 +29,9 @@ export default async function handler(
   const client = await db.connect();
 
   const quizlets =
-    await client.sql`INSERT INTO QUIZLETS (name, url, clerk, subject, created, id)
+    await client.sql`INSERT INTO QUIZLETS (url, clerk, subject, created, id)
   VALUES (
-    ${name}, ${url}, ${clerk}, ${subject}, ${formattedDate}, ${uuidv4()})
+    ${url}, ${clerk}, ${subject}, ${formattedDate}, ${uuidv4()})
   RETURNING *;`;
   return response.status(200).json({ quizlets });
 }
